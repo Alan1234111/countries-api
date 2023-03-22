@@ -1,6 +1,17 @@
+const btnMode = document.querySelector("button.btn");
 const contriesContainer = document.querySelector(".container-contries");
+const search = document.getElementById("search-input");
+const selectRegion = document.getElementById("select-region");
+
+const contriesArray = [];
+
+function changeTheme() {
+  document.body.classList.toggle("bg-white-theme");
+  document.body.classList.toggle("bg-dark-theme");
+}
 
 function createBlocks(country) {
+  // console.log(country);
   const container = document.createElement("div");
   container.classList.add("bg-white", "p-0", "rounded", "pb-2", "mx-auto");
 
@@ -38,13 +49,49 @@ function createBlocks(country) {
   contriesContainer.appendChild(container);
 }
 
-async function handlingData() {
-  const data = await fetch("data.json");
-  const response = await data.json();
+function showSearchedCountries() {
+  contriesContainer.innerHTML = "";
+  const filterCountries = contriesArray.filter((country) => {
+    return country.name.toLowerCase().includes(search.value.toLowerCase());
+  });
 
-  for (let i = 0; i < response.length; i++) {
-    createBlocks(response[i]);
+  filterCountries.forEach((filterCountry) => createBlocks(filterCountry));
+}
+
+function showFilterByRegion() {
+  if (selectRegion.value.toLowerCase() == "filter by region");
+
+  contriesContainer.innerHTML = "";
+
+  const filterCountries = contriesArray.filter((country) => {
+    return country.region
+      .toLowerCase()
+      .includes(selectRegion.value.toLowerCase());
+  });
+
+  filterCountries.forEach((filterCountry) => createBlocks(filterCountry));
+
+  if (search.value !== "") {
+    showSearchedCountries();
+  }
+}
+
+async function handlingData() {
+  try {
+    const data = await fetch("data.json");
+    const response = await data.json();
+
+    for (let i = 0; i < response.length; i++) {
+      createBlocks(response[i]);
+      contriesArray.push(response[i]);
+    }
+  } catch (err) {
+    console.error(err);
   }
 }
 
 handlingData();
+
+btnMode.addEventListener("click", changeTheme);
+search.addEventListener("input", showSearchedCountries);
+selectRegion.addEventListener("change", showFilterByRegion);
