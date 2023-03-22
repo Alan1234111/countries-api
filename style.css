@@ -2,6 +2,10 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+header {
+  background-color: hsl(209, 23%, 22%);
+}
+
 .bg-white-theme {
   background-color: hsl(0, 0%, 92%);
 }
@@ -26,7 +30,7 @@ body {
   width: 70%;
 }
 
-.container-contries {
+#all-contries {
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: minmax(1fr, 700px);
@@ -34,11 +38,11 @@ body {
   padding: 0 2rem;
 }
 
-.container-contries div {
+#all-contries div {
   padding-bottom: 2.5rem;
 }
 
-.container-contries img {
+#all-contries img {
   height: 40%;
 }
 
@@ -55,13 +59,13 @@ body {
     width: 60%;
   }
 
-  .container-contries {
+  #all-contries {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 992px) {
-  .container-contries {
+  #all-contries {
     grid-template-columns: repeat(4, 1fr);
   }
 }
