@@ -1,6 +1,13 @@
 body {
-  background-color: hsl(0, 0%, 92%);
   font-family: "Roboto", sans-serif;
+}
+
+.bg-white-theme {
+  background-color: hsl(0, 0%, 92%);
+}
+
+.bg-dark-theme {
+  background-color: hsl(207, 26%, 17%);
 }
 
 .navbar {
