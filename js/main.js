@@ -14,6 +14,13 @@ function createSingleBlock(country) {
   const btn = document.createElement("button");
   btn.classList.add("btn", "btn-secondary");
   btn.textContent = "Back";
+  btn.addEventListener("click", () => {
+    contriesContainer.innerHTML = "";
+    contriesContainer.id = "all-contries";
+    contriesArray.forEach((singleCountry) => {
+      createBlocks(singleCountry);
+    });
+  });
 
   const container = document.createElement("div");
   container.classList.add("container", "mt-5");
@@ -32,8 +39,9 @@ function createSingleBlock(country) {
   console.log(country);
 
   const secondRow = document.createElement("div");
+  secondRow.classList.add("row", "mt-4");
   const firstDetalisContainer = document.createElement("div");
-  firstDetalisContainer.classList.add("row", "mt-4");
+  firstDetalisContainer.classList.add("col-6");
 
   const name = document.createElement("p");
   name.innerHTML = `<b>Native Name:</b> ${country.name}`;
@@ -42,7 +50,8 @@ function createSingleBlock(country) {
   const region = document.createElement("p");
   region.innerHTML = ` <b>Region:</b> ${country.region}`;
   const subRegion = document.createElement("p");
-  subRegion.innerHTML = `<b>Sub Region:</b> ${country.subRegion}`;
+  console.log(country);
+  subRegion.innerHTML = `<b>Sub Region:</b> ${country.subregion}`;
   const capital = document.createElement("p");
   capital.innerHTML = `<b>Capital:</b> ${country.capital}`;
 
@@ -52,35 +61,30 @@ function createSingleBlock(country) {
   console.log(country);
 
   const domain = document.createElement("p");
-  domain.innerHTML = `<b>Top Level Domain</b> ${country.topLevelDomain}`;
+  domain.innerHTML = `<b>Top Level Domain:</b> ${country.topLevelDomain}`;
   const currencies = document.createElement("p");
   currencies.innerHTML = `<b>Currencies:</b> ${country.currencies[0].name}`;
   const languages = document.createElement("p");
-  languages.innerHTML = `<b>Languages</b> ${country.languages[0].name}`;
+  languages.innerHTML = `<b>Languages:</b> ${country.languages[0].name}`;
 
-  // <p>Top Level Domain: .be</p>
-  // /  <p>Currencies: Euro</p>
-  // <p>Langugaes: Dutch, French, Greman</p>
+  container.appendChild(row);
+  row.appendChild(img);
+  row.appendChild(columnContainer);
 
   firstDetalisContainer.appendChild(name);
   firstDetalisContainer.appendChild(population);
   firstDetalisContainer.appendChild(region);
   firstDetalisContainer.appendChild(subRegion);
   firstDetalisContainer.appendChild(capital);
+  secondRow.appendChild(firstDetalisContainer);
 
   secondDetailsContainer.appendChild(domain);
   secondDetailsContainer.appendChild(currencies);
   secondDetailsContainer.appendChild(languages);
-
-  container.appendChild(row);
-
-  row.appendChild(img);
-  row.appendChild(columnContainer);
-  console.log(columnContainer);
+  secondRow.appendChild(secondDetailsContainer);
 
   columnContainer.appendChild(h2);
-  columnContainer.appendChild(firstDetalisContainer);
-  columnContainer.appendChild(secondDetailsContainer);
+  columnContainer.appendChild(secondRow);
 
   contriesContainer.appendChild(btn);
   contriesContainer.appendChild(container);
@@ -134,7 +138,6 @@ function showCountryDetails() {
 }
 
 function createBlocks(country) {
-  // console.log(country);
   const container = document.createElement("div");
   container.classList.add("bg-white", "p-0", "rounded", "pb-2", "mx-auto");
 
