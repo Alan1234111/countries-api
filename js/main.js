@@ -10,6 +10,129 @@ function changeTheme() {
   document.body.classList.toggle("bg-dark-theme");
 }
 
+function createSingleBlock(country) {
+  const btn = document.createElement("button");
+  btn.classList.add("btn", "btn-secondary");
+  btn.textContent = "Back";
+
+  const container = document.createElement("div");
+  container.classList.add("container", "mt-5");
+
+  const row = document.createElement("div");
+  row.classList.add("row", "mt-4");
+  const img = document.createElement("img");
+  img.classList.add("img-fluid", "col-6");
+  img.src = country.flag;
+  img.alt = "";
+  const columnContainer = document.createElement("div");
+  columnContainer.classList.add("col-6");
+  const h2 = document.createElement("h2");
+  h2.textContent = country.name;
+
+  console.log(country);
+
+  const secondRow = document.createElement("div");
+  const firstDetalisContainer = document.createElement("div");
+  firstDetalisContainer.classList.add("row", "mt-4");
+
+  const name = document.createElement("p");
+  name.innerHTML = `<b>Native Name:</b> ${country.name}`;
+  const population = document.createElement("p");
+  population.innerHTML = ` <b>Population:</b> ${country.population}`;
+  const region = document.createElement("p");
+  region.innerHTML = ` <b>Region:</b> ${country.region}`;
+  const subRegion = document.createElement("p");
+  subRegion.innerHTML = `<b>Sub Region:</b> ${country.subRegion}`;
+  const capital = document.createElement("p");
+  capital.innerHTML = `<b>Capital:</b> ${country.capital}`;
+
+  const secondDetailsContainer = document.createElement("div");
+  secondDetailsContainer.classList.add("col-6");
+
+  console.log(country);
+
+  const domain = document.createElement("p");
+  domain.innerHTML = `<b>Top Level Domain</b> ${country.topLevelDomain}`;
+  const currencies = document.createElement("p");
+  currencies.innerHTML = `<b>Currencies:</b> ${country.currencies[0].name}`;
+  const languages = document.createElement("p");
+  languages.innerHTML = `<b>Languages</b> ${country.languages[0].name}`;
+
+  // <p>Top Level Domain: .be</p>
+  // /  <p>Currencies: Euro</p>
+  // <p>Langugaes: Dutch, French, Greman</p>
+
+  firstDetalisContainer.appendChild(name);
+  firstDetalisContainer.appendChild(population);
+  firstDetalisContainer.appendChild(region);
+  firstDetalisContainer.appendChild(subRegion);
+  firstDetalisContainer.appendChild(capital);
+
+  secondDetailsContainer.appendChild(domain);
+  secondDetailsContainer.appendChild(currencies);
+  secondDetailsContainer.appendChild(languages);
+
+  container.appendChild(row);
+
+  row.appendChild(img);
+  row.appendChild(columnContainer);
+  console.log(columnContainer);
+
+  columnContainer.appendChild(h2);
+  columnContainer.appendChild(firstDetalisContainer);
+  columnContainer.appendChild(secondDetailsContainer);
+
+  contriesContainer.appendChild(btn);
+  contriesContainer.appendChild(container);
+
+  //    <button class="btn btn-secondary" type="submit">Back</button>
+
+  // <div class="container mt-5">
+  //   <div class="row">
+  //     <img
+  //       class="img-fluid col-6"
+  //       src="https://flagcdn.com/ax.svg"
+  //       alt=""
+  //     />
+  //     <div class="col-6">
+  //       <h2>Belgium</h2>
+  //       <div class="row mt-4">
+  //         <div class="col-6">
+  //           <p>Native Name: Belgie</p>
+  //           <p>Population: 11.319.511</p>
+  //           <p>Region: Europe</p>
+  //           <p>Sub Region: Western Europe</p>
+  //           <p>Capital: Brussels</p>
+  //         </div>
+  //         <div class="col-6">
+  //           <p>Top Level Domain: .be</p>
+  //           <p>Currencies: Euro</p>
+  //           <p>Langugaes: Dutch, French, Greman</p>
+  //         </div>
+  //       </div>
+  //       <div class="d-flex mt-4">
+  //         <p class="d-flex me-3">Border Countries:</p>
+  //         <button class="btn btn-secondary">France</button>
+  //         <button class="btn btn-secondary">Germany</button>
+  //         <button class="btn btn-secondary">Netherlands</button>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+}
+
+function showCountryDetails() {
+  const countryName = this.querySelector("h2").textContent.trim();
+  const country = contriesArray.find((country) => {
+    return country.name == countryName;
+  });
+
+  contriesContainer.innerHTML = "";
+  contriesContainer.id = "single-country";
+
+  createSingleBlock(country);
+}
+
 function createBlocks(country) {
   // console.log(country);
   const container = document.createElement("div");
@@ -46,6 +169,7 @@ function createBlocks(country) {
   container.appendChild(img);
   container.appendChild(h2);
   container.appendChild(countryDetails);
+  container.addEventListener("click", showCountryDetails);
   contriesContainer.appendChild(container);
 }
 
@@ -95,3 +219,40 @@ handlingData();
 btnMode.addEventListener("click", changeTheme);
 search.addEventListener("input", showSearchedCountries);
 selectRegion.addEventListener("change", showFilterByRegion);
+
+{
+  /* <button class="btn btn-secondary" type="submit">Back</button>
+
+<div class="container mt-5">
+  <div class="row">
+    <img
+      class="img-fluid col-6"
+      src="https://flagcdn.com/ax.svg"
+      alt=""
+    />
+    <div class="col-6">
+      <h2>Belgium</h2>
+      <div class="row mt-4">
+        <div class="col-6">
+          <p>Native Name: Belgie</p>
+          <p>Population: 11.319.511</p>
+          <p>Region: Europe</p>
+          <p>Sub Region: Western Europe</p>
+          <p>Capital: Brussels</p>
+        </div>
+        <div class="col-6">
+          <p>Top Level Domain: .be</p>
+          <p>Currencies: Euro</p>
+          <p>Langugaes: Dutch, French, Greman</p>
+        </div>
+      </div>
+      <div class="d-flex mt-4">
+        <p class="d-flex me-3">Border Countries:</p>
+        <button class="btn btn-secondary">France</button>
+        <button class="btn btn-secondary">Germany</button>
+        <button class="btn btn-secondary">Netherlands</button>
+      </div>
+    </div>
+  </div>
+</div> */
+}
