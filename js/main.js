@@ -67,6 +67,15 @@ function createSingleBlock(country) {
   const languages = document.createElement("p");
   languages.innerHTML = `<b>Languages:</b> ${country.languages[0].name}`;
 
+  console.log(country.borders);
+  // console.log(country.bordres == true);
+
+  // if (country.bordres) {
+
+  // }
+
+  console.log(country);
+
   container.appendChild(row);
   row.appendChild(img);
   row.appendChild(columnContainer);
@@ -88,6 +97,23 @@ function createSingleBlock(country) {
 
   contriesContainer.appendChild(btn);
   contriesContainer.appendChild(container);
+
+  try {
+    const btnsContainer = document.createElement("div");
+    btnsContainer.classList.add("d-flex", "mt-4");
+    const borderCountries = document.createElement("p");
+    borderCountries.textContent = "Border Countries";
+    btnsContainer.appendChild(borderCountries);
+    country.borders.forEach((border) => {
+      const btn = document.createElement("btn");
+      btn.textContent = border;
+      btn.classList.add("btn");
+      btnsContainer.appendChild(btn);
+    });
+    columnContainer.appendChild(btnsContainer);
+  } catch {
+    console.error("doesnt have borders");
+  }
 
   //    <button class="btn btn-secondary" type="submit">Back</button>
 
